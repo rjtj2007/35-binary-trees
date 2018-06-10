@@ -93,7 +93,7 @@ describe('Binary Search Tree', () => {
       expect(addedFullTree().maxValue()).toBe(7);
     });
 
-    test.skip('many-value stress test', () => {
+    test('many-value stress test', () => {
       let {tree, max} = hugeTreeWithStats();
       expect(tree.max()).toBe(max);
     });
@@ -122,7 +122,7 @@ describe('Binary Search Tree', () => {
   });
 
   describe('BONUS: doesTreeContainAverage', () => {
-    test.skip('tree does contain average', () => {
+    test('tree does contain average', () => {
       let tree = new BinarySearchTree();
       tree.add(2);
       tree.add(4);
@@ -132,7 +132,7 @@ describe('Binary Search Tree', () => {
       expect(tree.doesTreeContainAverage()).toBe(true);
     });
 
-    test.skip('tree does not contain average', () => {
+    test('tree does not contain average', () => {
       let tree = new BinarySearchTree();
       tree.add(1);
       tree.add(2);

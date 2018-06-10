@@ -94,18 +94,30 @@ class BinarySearchTree {
 
   // return the overall minimum value stored in the tree.
   // return undefined if the tree is empty.
+
   minValue() {
-    if(this.root === null) {
+    if (this.root === null) {
       return undefined;
     }
-    return this._minValue(this.root);
+    let min = this.root.value;
+    let newMin = this._minValue(this.root, min);
+    return newMin;
   }
 
-  _minValue(node) {
-    if(node.left === null) {
-      return node.value;
+  _minValue(node, min) {
+    if (node.left) {
+      if (min > node.left.value) {
+        min = node.left.value;
+      }
+      min = this._minValue(node.left, min);
     }
-    return this._minValue(node.left);
+    if (node.right) {
+      if (min > node.right.value) {
+        min = node.right.value;
+      }
+      min = this._minValue(node.right, min);
+    }
+    return min;
   }
 
   // return the overall maximum value stored in the tree.
@@ -114,15 +126,27 @@ class BinarySearchTree {
     if(this.root === null) {
       return undefined;
     }
-      return this._maxValue(this.root);
+      let max = this.root.value;
+      let newMax = this._maxValue(this.root, max);
+      return newMax;
   }
 
-    _maxValue(node) {
-      if(node.right === null) {
-        return node.value;
+  _maxValue(node, max) {
+    if(node.left) {
+      if(max < node.left.value) {
+        max = node.left.value;
       }
-      return this._maxValue(node.right);
+      max = this._maxValue(node.left, max);
     }
+    if(node.right) {
+      if(max < node.right.value) {
+        max = node.right.value;
+      }
+      max = this._maxValue(node.right, max);
+    }
+    return max;
+  }
+
 
   // use a traversal to count the total number of nodes stored in the tree.
   // DO NOT store a value like `numNodes` and increment it in add().
@@ -180,10 +204,28 @@ class BinarySearchTree {
   // of the average value of all the nodes themselves. for example: 
   // true for tree with [2 4 6 8 10] because it has 6
   // false for tree with [1 2 3 4 5 6] because it has no 3.5
+  
+  // step 1: go through tree to determine average value.
   doesTreeContainAverage() {
-    // step 1: go through tree to determine average value.
-    // step 2: go through tree again to see if it has that value.
+    if(this.root === null) {
+      return false;
+    }
+    let nodes = this.numNodes();
+    let sum = this._doesTreeContainAverageSum(this.root);
+    let avg = sum / nodes;
+    return this.contains(avg);
+  }
+  // step 2: go through tree again to see if it has that value.
+  _doesTreeContainAverageSum(node) {
+    let sum = node.value;
+    if(node.left) {
+      sum += this._doesTreeContainAverageSum(node.left);
+    }
+    if(node.right) {
+      sum += this._doesTreeContainAverageSum(node.right);
+    }
     // step 3: return result
+    return sum;
   }
 }
 
