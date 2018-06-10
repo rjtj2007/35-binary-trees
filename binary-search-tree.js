@@ -95,20 +95,60 @@ class BinarySearchTree {
   // return the overall minimum value stored in the tree.
   // return undefined if the tree is empty.
   minValue() {
+    if(this.root === null) {
+      return undefined;
+    }
+    return this._minValue(this.root);
+  }
 
+  _minValue(node) {
+    if(node.left === null) {
+      return node.value;
+    }
+    return this._minValue(node.left);
   }
 
   // return the overall maximum value stored in the tree.
   // return undefined if the tree is empty.
   maxValue() {
-
+    if(this.root === null) {
+      return undefined;
+    }
+      return this._maxValue(this.root);
   }
+
+    _maxValue(node) {
+      if(node.right === null) {
+        return node.value;
+      }
+      return this._maxValue(node.right);
+    }
 
   // use a traversal to count the total number of nodes stored in the tree.
   // DO NOT store a value like `numNodes` and increment it in add().
   // You MUST traverse the entire tree when you do this.
   numNodes() {
+    if(this.root === null) {
+      return 0;
+    }
+    let count = 1;
+    return count += this._numNodes(this.root);
+  }
 
+  _numNodes(node) {
+    let num = 0;
+    if(!node) {
+      return count;
+    }
+    if(node.left) {
+      num ++;
+      num += this._numNodes(node.left);
+    }
+    if(node.right) {
+      num++;
+      num += this._numNodes(node.right);
+    }
+    return num;
   }
 
   // traverse the entire tree and count the total number of leaf nodes.
