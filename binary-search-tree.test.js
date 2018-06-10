@@ -111,10 +111,10 @@ describe('Binary Search Tree', () => {
   });
 
   describe('numLeaves()', () => {
-    test.skip('empty tree is empty', () => {
+    test('empty tree is empty', () => {
       expect(emptyTree().numLeaves()).toBe(0);
     })
-    test.skip('non-empty tree isn\'t empty', () => {
+    test('non-empty tree isn\'t empty', () => {
       expect(oneTree().numLeaves()).toBe(1);
       expect(twoTree().numLeaves()).toBe(1);
       expect(fullTree().numLeaves()).toBe(2);

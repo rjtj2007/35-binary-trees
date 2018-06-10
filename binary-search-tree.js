@@ -154,7 +154,26 @@ class BinarySearchTree {
   // traverse the entire tree and count the total number of leaf nodes.
   // leaf nodes are nodes that have no child nodes on their left or right.
   numLeaves() {
+    if(this.root === null) {
+      return 0;
+    }
+    let leaves = 0;
+    return leaves += this._numLeaves(this.root);
+  }
 
+  _numLeaves(node) {
+    let leaves = 0;
+    if(!node.left && !node.right) {
+      leaves++;
+    } else {
+      if(node.left) {
+      leaves += this._numLeaves(node.left);
+    }
+      if(node.right) {
+        leaves += this._numLeaves(node.right);
+      }
+    }
+    return leaves;
   }
 
   // BONUS: returns true if the tree has one node with the value
